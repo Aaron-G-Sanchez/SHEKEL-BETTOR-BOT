@@ -7,7 +7,7 @@ module.exports = {
 
   async execute(interaction) {
     await interaction.reply(
-      `This command was ran by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`
+      `This command was ran by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.\nUserId: ${interaction.user.id}.`
     )
   }
 }
