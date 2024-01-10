@@ -39,6 +39,13 @@ module.exports = {
     console.log(response.data)
 
     // Need to fix the reply message but all else works
-    await interaction.reply({ content: 'Thanks!' })
+    await interaction.reply({
+      content: `${response.data.users[0].userName} just donated ${bet} shekel[s] to ${response.data.users[1].userName}!`
+    })
+
+    await interaction.followUp({
+      content: `Your shekel count is ${response.data.users[0].shekelCount}`,
+      ephemeral: true
+    })
   }
 }
