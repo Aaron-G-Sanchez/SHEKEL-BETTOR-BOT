@@ -36,9 +36,6 @@ module.exports = {
       }
     )
 
-    console.log(response.data)
-
-    // Need to fix the reply message but all else works
     await interaction.reply({
       content: `${response.data.users[0].userName} just donated ${bet} shekel[s] to ${response.data.users[1].userName}!`
     })
