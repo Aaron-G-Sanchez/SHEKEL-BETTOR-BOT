@@ -25,24 +25,31 @@ module.exports = {
     const bet = interaction.options.getNumber('bet')
     const betWinner = interaction.options.getUser('user')
 
-    const response = await axios.put(
-      `http://localhost:3001/users/${userId}/${userName}`,
-      {
-        bet,
-        winner: {
-          userId: betWinner.id,
-          userName: betWinner.username
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/users/${userId}/${userName}`,
+        {
+          bet,
+          winner: {
+            userId: betWinner.id,
+            userName: betWinner.username
+          }
         }
-      }
-    )
+      )
 
-    await interaction.reply({
-      content: `${response.data.users[0].userName} just donated ${bet} shekel[s] to ${response.data.users[1].userName}!`
-    })
+      await interaction.reply({
+        content: `${response.data.message[0].userName} just donated ${bet} shekel[s] to ${response.data.message[1].userName}!`
+      })
 
-    await interaction.followUp({
-      content: `Your shekel count is ${response.data.users[0].shekelCount}`,
-      ephemeral: true
-    })
+      await interaction.followUp({
+        content: `Your shekel count is ${response.data.message[0].shekelCount}`,
+        ephemeral: true
+      })
+    } catch (err) {
+      await interaction.reply({
+        content: err.response.data.message,
+        ephemeral: true
+      })
+    }
   }
 }
